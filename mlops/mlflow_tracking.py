@@ -1,10 +1,10 @@
 import mlflow
-from backend.core.config import config
+from backend.core.config import config  # your custom Config class
 import os
 
-# ✅ Use dot notation for OmegaConf or Config object
-MLFLOW_URI = config.mlflow.tracking_uri
-EXPERIMENT_NAME = config.mlflow.experiment_name
+# ✅ Access nested values via `config.data`
+MLFLOW_URI = config.data.mlops.mlflow.tracking_uri
+EXPERIMENT_NAME = config.data.mlops.mlflow.experiment_name
 
 def start_run(run_name=None):
     mlflow.set_tracking_uri(MLFLOW_URI)
@@ -29,7 +29,7 @@ def log_artifact(filepath: str):
 def end_run():
     mlflow.end_run()
 
-# ✅ Example usage in training script
+# ✅ Example usage
 if __name__ == "__main__":
     run = start_run("Example Training Run")
     log_params({"epochs": 10, "batch_size": 32, "lr": 0.001})
