@@ -1,0 +1,63 @@
+app:
+  host: "0.0.0.0"
+  port: 8000
+  debug: true
+
+paths:
+  data:
+    train_data: "da/train.json"
+    test_data: "da/test.json"
+    processed_docs: "data/processed"
+
+  artifacts:
+    classifier_model: "artifacts/classifier_model2.joblib"
+    ner_model_dir: "artifacts/ner_model"
+    summarizer_model_dir: "artifacts/summarizer_model"
+    draft_model_dir: "artifacts/gpt2_model"
+    risk_detector_model: "artifacts/risk_detector_model.joblib"  # <-- important!
+
+mlops:
+  mlflow:
+    tracking_uri: "sqlite:///../mlruns/mlflow.db"
+    artifact_location: "../artifacts"
+    experiment_name: "lexidraft_experiment"
+
+models:
+  classifier:
+    name: "LegalDocClassifier"
+    version: "1.0.0"
+    threshold: 0.5
+
+  ner:
+    name: "LegalNER"
+    version: "1.0.0"
+    model_type: "spacy"
+
+  summarizer:
+    name: "LegalSummarizer"
+    version: "1.0.0"
+    max_length: 150
+    min_length: 30
+    model_type: "transformers"
+
+  draft_generator:
+    name: "GPT2DraftGen"
+    version: "1.0.0"
+    model_name: "gpt2"
+    max_tokens: 200
+
+  risk_detector:
+    name: "LegalRiskDetector"
+    version: "1.0.0"
+    risk_threshold: 0.6
+
+logging:
+  level: "INFO"
+  log_file: "../logs/app.log"
+
+database:
+  uri: "sqlite:///../data/legal_docs.db"
+
+api:
+  docs_url: "/docs"
+  openapi_url: "/openapi.json"

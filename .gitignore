@@ -1,0 +1,9 @@
+venv310/
+
+artifacts/gpt2_model/
+artifacts/classifier_model2.joblib/
+artifacts/classifier_model.joblib/
+artifacts/risk_detector_model.joblib/
+artifacts/gpt2_model/pytorch_model.bin
+da/test.json
+da/train.json
