@@ -1,9 +1,16 @@
+# Ignore virtual environment
 venv310/
 
-artifacts/gpt2_model/
-artifacts/classifier_model2.joblib/
-artifacts/classifier_model.joblib/
-artifacts/risk_detector_model.joblib/
+# Ignore model artifacts
+artifacts/
+!artifacts/.gitkeep  # (optional) if you want to keep the folder structure
+
+# Ignore specific model binaries if not ignoring the entire folder
+artifacts/*.joblib
 artifacts/gpt2_model/pytorch_model.bin
-da/test.json
-da/train.json
+
+# Ignore data files
+da/*.json
+
+# Ignore only processed data
+data/processed/
