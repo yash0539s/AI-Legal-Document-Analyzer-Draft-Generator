@@ -2,8 +2,9 @@ import mlflow
 from backend.core.config import config
 import os
 
-MLFLOW_URI = config["mlflow"]["tracking_uri"]
-EXPERIMENT_NAME = config["mlflow"]["experiment_name"]
+# ✅ Use dot notation for OmegaConf or Config object
+MLFLOW_URI = config.mlflow.tracking_uri
+EXPERIMENT_NAME = config.mlflow.experiment_name
 
 def start_run(run_name=None):
     mlflow.set_tracking_uri(MLFLOW_URI)
@@ -28,7 +29,7 @@ def log_artifact(filepath: str):
 def end_run():
     mlflow.end_run()
 
-# Example usage in training script
+# ✅ Example usage in training script
 if __name__ == "__main__":
     run = start_run("Example Training Run")
     log_params({"epochs": 10, "batch_size": 32, "lr": 0.001})
