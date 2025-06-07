@@ -1,4 +1,4 @@
-# Use official Python image
+# Use official slim Python image
 FROM python:3.10-slim
 
 # Environment settings
@@ -14,13 +14,14 @@ RUN apt-get update && apt-get install -y \
     curl \
     && rm -rf /var/lib/apt/lists/*
 
-# Copy requirements and install them
+# Copy requirements first for layer caching
 COPY requirements.txt .
 
-RUN pip install --upgrade pip
-RUN pip install --no-cache-dir -r requirements.txt
+# Upgrade pip and install Python dependencies with retries & timeout
+RUN pip install --upgrade pip && \
+    pip install --no-cache-dir --timeout 120 --retries 10 -r requirements.txt
 
-# Copy full project into container
+# Copy the full project
 COPY . .
 
 # Download spaCy model
