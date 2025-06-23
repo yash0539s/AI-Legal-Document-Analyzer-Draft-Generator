@@ -64,11 +64,15 @@ streamlit run streamlit_app.py
 
 ```
 LexiDraft-Pro/
+|   ├── artifacts/
 │
 ├── backend/
 │   ├── api/
 │   ├── core/
 │   ├── models/
+|   ├── services/
+|   ├── frontend/
+|   ├── tests/
 │   └── main.py
 │
 ├── streamlit_ui/
